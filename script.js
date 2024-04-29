@@ -7,6 +7,9 @@ const cart = document.querySelector(".carrello");
 const search = document.getElementById("search");
 // Array per tenere traccia degli elementi aggiunti al carrello
 const carrelloItems = []; 
+// totale costo carrello
+const tot = document.getElementById('totale');
+
 // al caricamento della pagina succedono cose
 document.addEventListener("DOMContentLoaded", () => {
   
@@ -58,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             <p class="card-text">${prezzo}$</p>
                         `;
                         cart.appendChild(cartResult);
+
+                        const totale = carrelloItems.reduce((acc, curr) => acc + curr.price, 0);
+                        tot.innerHTML = `Totale è ${totale}`;
                     }
                 }); // fine addeventlistener di aggiungi
         //-----------------------------------------------------------------------------------------------------------------
@@ -76,8 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const index = carrelloItems.findIndex(item => item.title === titolo); // se trovo un titolo
                     if (index !== -1) { // se non è -1
                         carrelloItems.splice(index, 1); // toglie un elemento dall'array
-                    }
-                }
+                    };
+                };
+                  const totale = carrelloItems.reduce((acc, curr) => acc + curr.price, 0); // calcolo il prezzo del carrello
+                  tot.innerHTML = `Totale è ${totale}`; // aggiungo il totale nel html
             });
         });// FINE SEZIONE RIMUOVI
         //----------------------------------------------------------------------------------------------------------------
@@ -92,6 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
         
           // Resetto lo stile
           card.style.border = '0px'
+
+          const totale = carrelloItems.reduce((acc, curr) => acc + curr.price, 0);
+          tot.innerHTML = `Totale è ${totale}`;
         });
         //FINE SVUOTA CARRELLO
         //-----------------------------------------------------------------------------------------------------------------
