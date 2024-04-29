@@ -1,10 +1,15 @@
 const api = "https://striveschool-api.herokuapp.com/books";
+// punto il container di tutti i libri
 const container = document.getElementById("contenitore");
+// punto il container del carrello
 const cart = document.querySelector(".carrello");
+// punto la barra di ricerca
 const search = document.getElementById("search");
-
+// Array per tenere traccia degli elementi aggiunti al carrello
+const carrelloItems = []; 
+// al caricamento della pagina succedono cose
 document.addEventListener("DOMContentLoaded", () => {
-  const carrelloItems = []; // Array per tenere traccia degli elementi aggiunti al carrello
+  
 
   fetch(api)
     .then((response) => {
@@ -35,15 +40,19 @@ document.addEventListener("DOMContentLoaded", () => {
         //SEZIONE AGGIUNGI AL CARRELLO
         // messo classe aggiungi su il bottone aggiungi al carrello e puntato conm query selector
         const aggiungi = card.querySelector(".aggiungi");
+                // al click del bottone Add to cart succedono cose
                 aggiungi.addEventListener("click", function (event) {
                     event.preventDefault();
+                    // punto il prezzo è il titolo
                     const titolo = book.title;
                     const prezzo = book.price;
+                    // se non trova un titolo pusha il titolo e il prezzo dentro il carrello
                     if (!carrelloItems.find(item => item.title === titolo)) {
                         carrelloItems.push({ title: titolo, price: prezzo });
+                        // aggiungo un bordo alla card la metto nel carrello
                         card.style.border = "1px solid blue";
-                        const cartResult = document.createElement("div");
-                        cartResult.classList.add('carrellino');
+                        const cartResult = document.createElement("div"); // creo un div che poi metterò dentro al carrello
+                        cartResult.classList.add('carrellino'); // metto una classe che mi servirà dopo per il rimuovi
                         cartResult.innerHTML = `
                             <h5 class="card-title">${titolo}</h5> <br>
                             <p class="card-text">${prezzo}$</p>
@@ -53,18 +62,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 }); // fine addeventlistener di aggiungi
         //-----------------------------------------------------------------------------------------------------------------
         // SEZIONE RIMUOVI DAL CARRELLO
+        // punto la classe rimuovi sul bottone remove
         const rimuovi = card.querySelector(".rimuovi");
+        // al click di questo bottone succedono cose
         rimuovi.addEventListener('click', function (event) {
             event.preventDefault();
-            const titolo = book.title;
-            const cartItems = document.querySelectorAll('.carrellino');
+            const titolo = book.title; // punto i titoli dei libri
+            const cartItems = document.querySelectorAll('.carrellino'); // vado a puntare la classe carrellino che ho aggiunto prima
             cartItems.forEach(cartItem => {
-                if (cartItem.querySelector('.card-title').textContent === titolo) {
-                    cartItem.remove();
+                if (cartItem.querySelector('.card-title').textContent === titolo) { // se trovo un titolo 
+                    cartItem.remove(); // rimuovo il titolo dal carrello
                     card.style.border = '0px';
-                    const index = carrelloItems.findIndex(item => item.title === titolo);
-                    if (index !== -1) {
-                        carrelloItems.splice(index, 1);
+                    const index = carrelloItems.findIndex(item => item.title === titolo); // se trovo un titolo
+                    if (index !== -1) { // se non è -1
+                        carrelloItems.splice(index, 1); // toglie un elemento dall'array
                     }
                 }
             });
@@ -73,8 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
         //SEZIONE SVUOTA CARRELLO
         const svuotaCarrello = document.getElementById('bottone');
         svuotaCarrello.addEventListener('click', function () {
-          cart.innerHTML = ""; 
-          card.style.border = '0px';
+          // Svuota l'array carrelloItems
+          carrelloItems.length = 0;
+
+          // Rimuovi tutti gli elementi figlio del container del carrello
+          cart.innerHTML = "";
+        
+          // Resetto lo stile
+          card.style.border = '0px'
         });
         //FINE SVUOTA CARRELLO
         //-----------------------------------------------------------------------------------------------------------------
@@ -92,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
         //-----------------------------------------------------------------------------------------------------------------
-        // funzione per creare il risultato della ricerca
+        // funzione per creare il risultato della ricerca, ricreo le cards
         function searchResults(books) {
           container.innerHTML = ""; // Rimuovi tutte le card esistenti prima di visualizzare i nuovi risultati
 
