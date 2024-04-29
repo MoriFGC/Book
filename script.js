@@ -68,7 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             });
+        });// FINE SEZIONE RIMUOVI
+        //----------------------------------------------------------------------------------------------------------------
+        //SEZIONE SVUOTA CARRELLO
+        const svuotaCarrello = document.getElementById('bottone');
+        svuotaCarrello.addEventListener('click', function () {
+          cart.innerHTML = ""; 
+          card.style.border = '0px';
         });
+        //FINE SVUOTA CARRELLO
         //-----------------------------------------------------------------------------------------------------------------
         // Sezione ricerca
         search.addEventListener("input", function () {
@@ -83,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             searchResults(filtredBooks);
           }
         });
+        //-----------------------------------------------------------------------------------------------------------------
         // funzione per creare il risultato della ricerca
         function searchResults(books) {
           container.innerHTML = ""; // Rimuovi tutte le card esistenti prima di visualizzare i nuovi risultati
