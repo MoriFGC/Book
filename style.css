@@ -1,0 +1,7 @@
+.carrello {
+    border: 2px solid red;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
