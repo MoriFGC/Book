@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         cart.appendChild(cartResult);
 
                         const totale = carrelloItems.reduce((acc, curr) => acc + curr.price, 0);
-                        tot.innerHTML = `Totale è ${totale}`;
+                        tot.innerHTML = `Totale: ${totale}`;
                     }
                 }); // fine addeventlistener di aggiungi
         //-----------------------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     };
                 };
                   const totale = carrelloItems.reduce((acc, curr) => acc + curr.price, 0); // calcolo il prezzo del carrello
-                  tot.innerHTML = `Totale è ${totale}`; // aggiungo il totale nel html
+                  tot.innerHTML = `Totale: ${totale}`; // aggiungo il totale nel html
             });
         });// FINE SEZIONE RIMUOVI
         //----------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
           card.style.border = '0px'
 
           const totale = carrelloItems.reduce((acc, curr) => acc + curr.price, 0);
-          tot.innerHTML = `Totale è ${totale}`;
+          tot.innerHTML = `Totale: ${totale}`;
         });
         //FINE SVUOTA CARRELLO
         //-----------------------------------------------------------------------------------------------------------------
