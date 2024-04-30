@@ -24,6 +24,7 @@ window.onload = () => {
       return response.json();
     })
     .then((data) => {
+        console.log(data);
       const card = document.createElement("div");
       card.classList.add("col");
 
@@ -33,9 +34,9 @@ window.onload = () => {
                 <div class="card-body">
                   <h5 class="card-title">${data.title}</h5>
                   <p class="card-text">${data.price}$</p>
-                  <a href="#" class="btn btn-primary aggiungi"><i class="bi bi-cart"></i> Add to cart</a>
-                  <a href="#" class="btn btn-primary rimuovi">remove</a>
-                  <a href="#" class="btn btn-primary nascondi">Hide</a>
+                  <p class="card-text text-capitalize fs-2">${data.category}</p>
+                  
+                  
                 </div>
               </div>
                 `;
