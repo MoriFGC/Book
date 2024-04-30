@@ -12,8 +12,6 @@ const tot = document.getElementById('totale');
 
 // al caricamento della pagina succedono cose
 document.addEventListener("DOMContentLoaded", () => {
-  
-
   fetch(api)
     .then((response) => {
       if (!response.ok) {
@@ -22,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       data.forEach((book) => {
         const card = document.createElement("div");
         card.classList.add("col");
@@ -34,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   <p class="card-text">${book.price}$</p>
                   <a href="#" class="btn btn-primary aggiungi"><i class="bi bi-cart"></i> Add to cart</a>
                   <a href="#" class="btn btn-primary rimuovi">remove</a>
+                  <a href="#" class="btn btn-primary nascondi">Hide</a>
+                  <a href="details.html?id=${book.asin}" class="btn btn-primary ">See details</a>
                 </div>
               </div>
                 `;
@@ -89,6 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });// FINE SEZIONE RIMUOVI
         //----------------------------------------------------------------------------------------------------------------
+        // SEZIONE NASCONDI CARD
+        const nascondi = card.querySelectorAll('.nascondi');
+        nascondi.forEach(hide => {
+          hide.addEventListener('click', function() {
+            card.style.display = 'none'
+          })
+        })
+        //-----------------------------------------------------------------------------------------------------------------
         //SEZIONE SVUOTA CARRELLO
         const svuotaCarrello = document.getElementById('bottone');
         svuotaCarrello.addEventListener('click', function () {
